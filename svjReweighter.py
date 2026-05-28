@@ -155,7 +155,7 @@ def lund_normalization(events, field, norm, nJetsPerEvent):
     return events[field]
 
 
-def lund_post(events, field, doTestDist=False):
+def lund_post(events, field):
     if 'Nprongs' in field or 'Nsplittings' in field:
         events[field] = events[field]
     elif field == 'subjetStatVars':
