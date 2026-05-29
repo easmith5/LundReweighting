@@ -210,10 +210,10 @@ def lund_post(events, field):
         # events['lundWeightDistortionDown'] = np.clip(events['lundWeightDistortionDown'], 0, 5)
 
         ### Event Level Variations
-        events['lundWeightRawDistortion'] = ak.prod(events['lundWeightRawDistortion'], axis=-1)
+        events['lundWeightRawDistortion'] = ak.prod(events['lundWeightRawDistortion'], axis=-1)*events['lundWeightNom']
         x = events['lundWeightRawDistortion'] - 1
-        events['lundWeightDistortionUp'] = events['lundWeightRawDistortion']*events['lundWeightNom']
-        events['lundWeightDistortionDown'] = ak.where((1-x)<0, 0, (1-x))*events['lundWeightNom']
+        events['lundWeightDistortionUp'] = events['lundWeightRawDistortion']
+        events['lundWeightDistortionDown'] = ak.where((1-x)<0, 0, (1-x))
 
         events['lundWeightRawDistortion'] = np.clip(events['lundWeightRawDistortion'], 0, 5)
         events['lundWeightDistortionUp'] = np.clip(events['lundWeightDistortionUp'], 0, 5)
